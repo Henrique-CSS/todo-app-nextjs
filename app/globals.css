@@ -2,10 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Excon */
+@font-face {
+  font-family: 'Excon';
+  src: url('//cdn.fontshare.com/wf/H5TXJTCVEL3JP5T6H2HLU32MM3BNIUHF/W2E2IE7CU35E4MKG5HKJTAOLTAMXQFUU/6SKIM7MFNDCQT6WO2N4KWOESBLYOY2XU.woff2') format('woff2'),
+       url('//cdn.fontshare.com/wf/H5TXJTCVEL3JP5T6H2HLU32MM3BNIUHF/W2E2IE7CU35E4MKG5HKJTAOLTAMXQFUU/6SKIM7MFNDCQT6WO2N4KWOESBLYOY2XU.woff') format('woff'),
+       url('//cdn.fontshare.com/wf/H5TXJTCVEL3JP5T6H2HLU32MM3BNIUHF/W2E2IE7CU35E4MKG5HKJTAOLTAMXQFUU/6SKIM7MFNDCQT6WO2N4KWOESBLYOY2XU.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* Ranade */
+@font-face {
+  font-family: 'Ranade';
+  src: url('//cdn.fontshare.com/wf/L5FIDTVUREF47ZIMK4SAWFIM3RQHGDRR/DDQOLYOU6G7WW4V2YVREV3FNKPCID7UW/L5RECMN3L4DWXPPVTDJQP3FAU32IQIX5.woff2') format('woff2'),
+       url('//cdn.fontshare.com/wf/L5FIDTVUREF47ZIMK4SAWFIM3RQHGDRR/DDQOLYOU6G7WW4V2YVREV3FNKPCID7UW/L5RECMN3L4DWXPPVTDJQP3FAU32IQIX5.woff') format('woff'),
+       url('//cdn.fontshare.com/wf/L5FIDTVUREF47ZIMK4SAWFIM3RQHGDRR/DDQOLYOU6G7WW4V2YVREV3FNKPCID7UW/L5RECMN3L4DWXPPVTDJQP3FAU32IQIX5.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ranade';
+  src: url('//cdn.fontshare.com/wf/7OTJOHFEPKR66PMSSHSIZWFRJ2TCRAQE/ZYSSO7DGGAENCZM63EAMXVP5TK4S6MJN/V3MB2BKRGQ5JGQILJVYBNPQWQKMQBQMB.woff2') format('woff2'),
+       url('//cdn.fontshare.com/wf/7OTJOHFEPKR66PMSSHSIZWFRJ2TCRAQE/ZYSSO7DGGAENCZM63EAMXVP5TK4S6MJN/V3MB2BKRGQ5JGQILJVYBNPQWQKMQBQMB.woff') format('woff'),
+       url('//cdn.fontshare.com/wf/7OTJOHFEPKR66PMSSHSIZWFRJ2TCRAQE/ZYSSO7DGGAENCZM63EAMXVP5TK4S6MJN/V3MB2BKRGQ5JGQILJVYBNPQWQKMQBQMB.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: italic;
+}
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground: #094067;
+  --background: #fffffe;
+  --fa-font-solid: normal 900 1em/1 'Font Awesome 6 Free';
+}
+
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("https://use.fontawesome.com/releases/v6.4.0/webfonts/fa-solid-900.woff2") format("woff2"), url("https://use.fontawesome.com/releases/v6.4.0/webfonts/fa-solid-900.ttf") format("truetype");
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,12 +56,72 @@
   }
 }
 
+.fa-check:checked:before {
+  font: var(--fa-font-solid);
+  display: block;
+  position: relative;
+  width: max-content;
+  height: max-content;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--background);
+  content: "\f00c";
+}
+
+.fa-trash:before {
+  font: var(--fa-font-solid);
+  display: block;
+  position: relative;
+  content: "\f12d";
+}
+
+.skeleton {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  overflow: hidden;
+  background-color: #DDDBDD;
+}
+
+.skeleton::after {
+  position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.5) 60%,
+      rgba(255, 255, 255, 0)
+    );
+    animation: shimmer 1.6s infinite;
+    content: '';
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--foreground-rgb);
+  background-color: var(--background);
+  font-family: 'Ranade', sans-serif;
+}
+
+h2 {
+  color: #5f6c7b;
+}
+
+h1 {
+  font-family: 'Excon', sans-serif;
+}
+
+button {
+  color: var(--background);
 }
