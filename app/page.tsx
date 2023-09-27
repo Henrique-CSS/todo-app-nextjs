@@ -22,9 +22,7 @@ export default function Home() {
     { task: "My first task", check: false },
     { task: "My second task", check: true },
   ];
-  const [tasks, setTasks] = useState<ITask[]>([
-    { task: "", check: false },
-  ]);
+  const [tasks, setTasks] = useState<ITask[]>([{ task: "", check: false }]);
   const [iError, setIError] = useState(false);
   const [taskName, setTaskName] = useState("");
   const firstRes = Cookies.get("tasks");
@@ -45,19 +43,17 @@ export default function Home() {
   }, []);
 
   function delTask(id: number) {
-    const newTasks = tasks.filter((_, i) => i !== id)
-    setTasks(newTasks)
+    const newTasks = tasks.filter((_, i) => i !== id);
+    setTasks(newTasks);
     Cookies.set("tasks", btoa(JSON.stringify(tasks)));
   }
 
   function addTask() {
-    const newTasks = tasks;
     const newTask: ITask = {
       task: taskName,
       check: false,
     };
-    newTasks.push(newTask);
-    setTasks(newTasks)
+    setTasks((prevTasks) => [...prevTasks, newTask]);
     setTaskName("");
     Cookies.set("tasks", btoa(JSON.stringify(tasks)));
   }
@@ -81,6 +77,7 @@ export default function Home() {
             className="mb-8 flex flex-row justify-between sm:max-w-sm"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
+                e.preventDefault();
                 if (taskName.length > 0) {
                   addTask();
                 } else {
@@ -115,17 +112,19 @@ export default function Home() {
             </button>
           </form>
         </div>
-        {tasks.map((item, index) => (
-          <Item
-            key={index}
-            name={item.task}
-            check={item.check}
-            id={index}
-            onDel={() => {
-              delTask(index);
-            }}
-          />
-        ))}
+        <div className="flex-grow max-h-full overflow-auto w-fit min-w-[352px]">
+          {tasks.map((item, index) => (
+            <Item
+              key={index}
+              name={item.task}
+              check={item.check}
+              id={index}
+              onDel={() => {
+                delTask(index);
+              }}
+            />
+          ))}
+        </div>
         <p
           className="font-light text-[#5f6c7b] underline hover:text-[#2b6cb0] focus:outline-none"
           onClick={() => {
